@@ -23,16 +23,23 @@ const showProducts = (products) => {
       <div>
     <img class="product-image" src=${product.image}></img>
       </div>
-      <h3>${product.title}</h3>
+      <h3>${product.title.slice(0-25
+        )}</h3>
       <p>Category: ${product.category}</p>
       <h2>Price: $ ${product.price}</h2>
       <p>Rating: ${product.rating.rate} <span class="count">Count: ${product.rating.count}</span> </p>
       <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button></div>
+      <button onclick="addDetails('${product}')" id="details-btn" class="btn btn-danger">Details</button></div>
       `;
     document.getElementById("all-products").appendChild(div);
   }
 };
+const addDetails = (products) => {
+  const url = `https://fakestoreapi.com/products/${products}`
+ fetch(url)
+ .then(Response => Response.json())
+ .then(data => console.log(data.products));
+}
 
 let count = 0;
 const addToCart = (id, price) => {
@@ -79,13 +86,14 @@ const updateTaxAndCharge = () => {
     setInnerText("delivery-charge", 60);
     setInnerText("total-tax", priceConverted * 0.4);
   }
+  updateTotal();
 };
 
 //grandTotal update function
-const updateTotal = (data) => {
+const updateTotal = () => {
   const grandTotal =
     getInputValue("price") + getInputValue("delivery-charge") +
     getInputValue("total-tax");
-   document.getElementById("total").innerText = grandTotal.toFixed(2);
+   document.getElementById("total").innerText= grandTotal.toFixed(2);
 };
 loadProducts();
