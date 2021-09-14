@@ -3,15 +3,6 @@ const loadProducts = () => {
   showProducts(data);
 };
 
-// const loadProducts = () => {
-//   const url = `https://fakestoreapi.com/products`;
-//   fetch(url)
-//     .then((response) => response.json())
-//     .then((data) => showProducts(data));
-//     // .then(data => console.log(data));
-// };
-
-
 // show all product in UI 
 const showProducts = (products) => {
   const allProducts = products.map((pd) => pd);
